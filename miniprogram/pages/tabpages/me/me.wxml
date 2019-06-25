@@ -1,0 +1,6 @@
+<view>
+  <text class="nav_title">{{navTitle}}</text>
+  <view class="container">
+
+  </view>
+</view>

@@ -1,0 +1,69 @@
+/* components/comments/comments.wxss */
+
+.content {
+  font-size: 30rpx;
+  margin-top: 20rpx;
+  margin-left: 110rpx;
+}
+
+.comments {
+}
+
+.splite {
+  height: 12rpx;
+  background: #f7f9fa;
+}
+
+.comments_info {
+  border-bottom: 2rpx solid #e6e6e6;
+  padding: 30rpx;
+  font-size: 33rpx;
+  font-weight: bold;
+}
+
+.comment {
+  border-bottom: 2rpx solid #e6e6e6;
+  padding: 20rpx 40rpx;
+}
+
+.info {
+  overflow: hidden;
+}
+
+.avatar {
+  float: left;
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.avatar image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.other{
+  float: left;
+  margin-left: 30rpx;
+}
+.username{
+  font-size: 30rpx;
+  display: block;
+}
+.time{
+  font-size: 25rpx;
+  color: #ccc;
+  display: block;
+  margin-top: 10rpx;
+}
+.tip{
+  font-size: 30rpx;
+  text-align: center;
+  padding: 40rpx;
+  color: #5c3b00;
+}
+.index{
+  float: right;
+  font-size: 25rpx;
+  color: #5c3b00;
+}

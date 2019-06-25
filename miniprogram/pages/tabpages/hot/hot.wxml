@@ -1,0 +1,29 @@
+<view>
+  <text class="nav_title">{{navTitle}}</text>
+  <view class="container">
+    <view id="home_page">
+        <!--帖子item-->
+      <view class='topic_item' data-id='{{index}}' wx:for="{{home_topics}}" bindtap='showTopic'>
+        <view class='topic_avatar'>
+          <!--头像-->
+          <image lazy-load='true' src='{{item.member.avatar_normal}}'></image>
+        </view>
+        <view class='topic_content'>
+          <!--标题-->
+          <view class='topic_title'>{{item.title}}</view>
+          <!--其他信息-->
+          <view class='topic_info'>
+            <!--节点名称-->
+            <view class='topic_node'>{{item.node.title}}</view>
+            <!--发布者名称-->
+            <view class='topic_member'>{{item.member.username}}</view>
+            <!--日期-->
+            <view class='topic_time'>{{item.created}}</view>
+            <!--回复-->
+            <view class='topic_replies'>{{item.replies}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

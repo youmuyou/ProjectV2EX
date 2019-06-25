@@ -1,0 +1,1 @@
+declare function Component(s: any): any;

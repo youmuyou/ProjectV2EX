@@ -1,0 +1,49 @@
+{
+  "pages": [
+    "pages/tabpages/index/index",
+    "pages/tabpages/hot/hot",
+    "pages/tabpages/tip/tip",
+    "pages/tabpages/me/me",
+    "pages/topic_view/topic_view"
+  ],
+  "tabBar": {
+    "custom": true,
+    "color": "#7A7E83",
+    "selectedColor": "#3cc51f",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/tabpages/index/index",
+        "iconPath": "/images/home.png",
+        "selectedIconPath": "/images/home_active.png",
+        "text": "最新"
+      },
+      {
+        "pagePath": "pages/tabpages/hot/hot",
+        "iconPath": "/images/hot.png",
+        "selectedIconPath": "/images/hot_active.png",
+        "text": "热榜"
+      },
+      {
+        "pagePath": "pages/tabpages/tip/tip",
+        "iconPath": "/images/tip.png",
+        "selectedIconPath": "/images/tip_active.png",
+        "text": "提醒"
+      },
+      {
+        "pagePath": "pages/tabpages/me/me",
+        "iconPath": "/images/me.png",
+        "selectedIconPath": "/images/me_active.png",
+        "text": "我"
+      }
+    ]
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json"
+}

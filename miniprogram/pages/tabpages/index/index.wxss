@@ -1,0 +1,122 @@
+/**index.wxss**/
+
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.usermotto {
+  margin-top: 200px;
+}
+
+.menu_icon {
+  width: 80rpx;
+}
+
+.navbar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 120rpx;
+  border-top: 0rpx solid #dadada;
+  background: white;
+}
+
+.navbar>button {
+  width: 25%;
+  display: inline-block;
+  background: transparent;
+  border: 0;
+  height: 100%;
+}
+
+.navbar>button::after {
+  border: 0;
+}
+
+.navbar>button>image {
+  width: 60%;
+  height: 100%;
+}
+
+
+
+
+/*帖子样式*/
+
+.topic_item {
+  display: flex;
+  padding: 40rpx;
+  align-content: stretch;
+}
+
+.topic_avatar {
+  float: left;
+}
+
+.topic_avatar image {
+  width: 114rpx;
+  height: 114rpx;
+  border-radius: 5rpx;
+}
+
+.topic_title {
+  display: block;
+  font-size: 35rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #2c2c2c;
+}
+
+.topic_content {
+  flex: 1;
+  width: 0;
+ 
+  margin: 0 20rpx;
+  /*flex-wrap: wrap;*/
+}
+
+.topic_info {
+  font-size: 30rpx;
+  margin-top: 16rpx;
+}
+.topic_info view{
+  display: inline-block;
+}
+.topic_node{
+  
+  background: #f6f6f6;
+  border-radius: 2rpx;
+  padding:4rpx 6rpx;
+  color: #aaa;
+}
+.topic_member{
+  margin-left: 8rpx;
+  color: #4d5256;
+}
+.topic_time{
+  margin-left: 8rpx;
+  color: #aaa;
+}
+.topic_replies{
+  float: right;
+  background: #ffc803;
+  color: white;
+  min-width: 40rpx;
+  text-align: center;
+  border-radius: 6rpx;
+  padding: 0 4rpx;
+}
