@@ -1,0 +1,3 @@
+interface INode {
+  title: string;
+}

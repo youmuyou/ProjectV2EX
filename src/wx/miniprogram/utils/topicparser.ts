@@ -47,7 +47,7 @@ export class TopicParser {
 
   matchTopics(html: string) {
     console.log("正在匹配帖子列表");
-    console.log(html);
+    //console.log(html);
     let Reg: any = /<div class="cell item">([\s\S]*?)<\/div>/g;
 
     let dataArray: any[] | null = html.match(Reg);

@@ -3,14 +3,15 @@
 //import { IMyApp } from '../../app';
 import { UtilTime } from '../../../utils/util_time';
 import { Cache } from '../../../utils/cache';
-//import { TopicParser } from '../../../utils/topicparser';
+import { TopicParser } from '../../../utils/topicparser';
+import { RequestTopics } from '../../../core/net/requestTopics';
 
 //const app = getApp<IMyApp>();
 
 let utilTime = new UtilTime();
 let cache = new Cache();
-//let parser = new TopicParser();
-
+let parser = new TopicParser();
+let requestTopics=new RequestTopics();
 let sender: any;
 let topicList: ITopic[] = [];
 let pageIndex: number = 1;
@@ -18,17 +19,19 @@ let pageIndex: number = 1;
 function getTopics(page: number) {
   console.log("正在加载帖子内容" + page);
   wx.request({
-    // url: 'https://www.v2ex.com/recent?p=' + page,
-    url: 'https://www.v2ex.com/api/topics/latest.json',
+     url: 'https://www.v2ex.com/recent?p=' + page,
+    //url: 'https://www.v2ex.com/api/topics/latest.json',
 
     header: {
-      'content-type': 'application/json' // 默认值
+      //'content-type': 'application/json' // 默认值
+      'content-type': 'text/html' // 默认值
+
     },
     success(res) {
       let data: any = res.data;
       console.log("加载帖子内容完成");
-      //parser.matchTopics(data);
-      //return;
+      parser.matchTopics(data);
+      return;
       let length: number = data.length;
       for (let i = 0; i < length; i++) {
         //data[i]["created"] = utilTime.getDateDiff(data[i]["created"]);
@@ -83,8 +86,13 @@ Component({
       sender = this;
 
       topicList = [];
-      getTopics(pageIndex);
-
+      //getTopics(pageIndex);
+      /*requestTopics.requestForHtml(pageIndex,(e:any)=>{
+        console.log(e);
+      });*/
+      wx.navigateTo({
+        url: '/pages/login/login'
+      });
       (this as any).getTabBar().setData({
         selected: 0
       })

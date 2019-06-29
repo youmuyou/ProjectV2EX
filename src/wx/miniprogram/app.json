@@ -4,7 +4,8 @@
     "pages/tabpages/hot/hot",
     "pages/tabpages/tip/tip",
     "pages/tabpages/me/me",
-    "pages/topic_view/topic_view"
+    "pages/topic_view/topic_view",
+    "pages/login/login"
   ],
   "tabBar": {
     "custom": true,
