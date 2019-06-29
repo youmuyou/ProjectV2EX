@@ -9,28 +9,24 @@ export class HttpRequest {
     | 'PUT'
     | 'DELETE'
     | 'TRACE'
-    | 'CONNECT' = "GET", contentType: string = "text/html", addCookie: boolean = true, v2ex: boolean = true) {
-    let referer: string = "";
-    if (v2ex) {
-      referer = "https://www.v2ex.com/signin";
-    }
+    | 'CONNECT' = "GET", contentType: string = "text/html", addCookie: boolean = true) {
+
     wx.request({
       url: url,
       method: method,
       data: data,
       header: {
         'content-type': contentType,
-        'Cookie': cookie,
-        'referer': referer
+        'Cookie': cookie
       },
-      success(res) {
+      success(res: any) {
         if (addCookie) {
           if (res.header) {
             if ('Set-Cookie' in res.header) {
-              wx.setStorageSync("cookie", res.header!['Set-Cookie']);
+              wx.setStorageSync("cookie", res.header['Set-Cookie']);
             }
             else if ('set-cookie' in res.header) {
-              wx.setStorageSync("cookie", res.header!['set-cookie'])
+              wx.setStorageSync("cookie", res.header['set-cookie'])
             }
           }
         }

@@ -4,20 +4,21 @@
 import { UtilTime } from '../../../utils/util_time';
 import { Cache } from '../../../utils/cache';
 import { TopicParser } from '../../../utils/topicparser';
-import { RequestTopics } from '../../../core/net/requestTopics';
+//import { RequestTopics } from '../../../core/net/requestTopics';
 
 //const app = getApp<IMyApp>();
 
 let utilTime = new UtilTime();
 let cache = new Cache();
 let parser = new TopicParser();
-let requestTopics=new RequestTopics();
+//let requestTopics=new RequestTopics();
 let sender: any;
 let topicList: ITopic[] = [];
-let pageIndex: number = 1;
+//let pageIndex: number = 1;
 
 function getTopics(page: number) {
   console.log("正在加载帖子内容" + page);
+  return;
   wx.request({
      url: 'https://www.v2ex.com/recent?p=' + page,
     //url: 'https://www.v2ex.com/api/topics/latest.json',
@@ -86,7 +87,7 @@ Component({
       sender = this;
 
       topicList = [];
-      //getTopics(pageIndex);
+      getTopics(0);
       /*requestTopics.requestForHtml(pageIndex,(e:any)=>{
         console.log(e);
       });*/
