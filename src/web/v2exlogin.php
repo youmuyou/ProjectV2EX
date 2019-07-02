@@ -14,7 +14,9 @@ foreach ($_POST as $key => $value) {
 $cookie = $data['cookie'];
 unset($data['cookie']);
 
-$requestResult = HttpRequest::getRequest($url, $data, $referer, true, $cookie);
+$cookiePath = dirname(__FILE__) . '/cookie.txt';
+
+$requestResult = HttpRequest::getRequest($url, $data, $referer, true, $cookie, $cookiePath);
 
 if (strpos($requestResult['result'], '用户名和密码无法匹配') !== false) {
     echo 0;
@@ -26,9 +28,10 @@ if (strpos($requestResult['result'], '用户名和密码无法匹配') !== false
     echo 3;
 } else if (strpos($requestResult['result'], '短时间内的登录尝试次数太多，目前暂时不能继续尝试') !== false) {
     echo 4;
-} else {
+} else if(!empty($requestResult['cookie'])){
     //登录成功
-    echo '(' . $requestResult['cookie'] . ')';
-    echo $requestResult['result'];
+    echo $requestResult['cookie'];
 }
-//var_dump($data);
+else{
+    echo 5;
+}

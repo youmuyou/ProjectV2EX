@@ -1,6 +1,8 @@
 <view>
   <text class="nav_title">{{navTitle}}</text>
   <view class="container">
-
+    <view wx:if="{{isLogin==false}}">
+      <button form-type="button" bindtap="gotologin">登录</button>
+    </view>
   </view>
 </view>

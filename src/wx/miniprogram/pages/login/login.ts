@@ -22,6 +22,9 @@ Page({
   onLoad() {
     sender = this;
     // return;
+    this.updateInfo();
+  },
+  updateInfo:function(){
     login.requestLoginInfo((postData: any, checkCode: string) => {
       console.log(postData);
       console.log(checkCode);

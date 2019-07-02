@@ -20,5 +20,6 @@
   </view>
   <view class="btn-area">
     <button form-type="submit">登录</button>
+     <button form-type="button" bindtap="updateInfo">刷新页面</button>
   </view>
 </form>

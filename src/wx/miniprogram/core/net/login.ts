@@ -1,5 +1,6 @@
 import { HttpRequest } from '../../core/net/httpRequest';
-
+import { User } from '../../core/net/user';
+let user = new User();
 let httpRequest = new HttpRequest();
 
 let usernameKey: string;
@@ -40,6 +41,8 @@ export class Login {
         postData["once"] = once;
         postData["cookie"] = wx.getStorageSync("cookie");
 
+        console.log(postData);
+        console.log(checkCodeUrl);
         /*httpRequest.getRequest(checkCodeUrl, null, (res: any) => {
           console.log(res);
         });*/
@@ -50,6 +53,7 @@ export class Login {
           },
           success(res) {
             if (res.statusCode === 200) {
+              console.log(checkCodeUrl);
               console.log(res.tempFilePath);
               callback(postData, res.tempFilePath);
             }
@@ -81,9 +85,34 @@ export class Login {
    */
   requestLogin(postData: any) {
     //提交到处理服务端
-    httpRequest.getRequest("http://v2ex/v2exlogin.php", postData, (res: any) => {
+    httpRequest.getRequest("https:///v2exlogin.php", postData, (res: any) => {
       console.log("登录返回");
       console.log(res.data);
+      if (res.data == "0") {
+
+      }
+      else if (res.data == "1") {
+
+      } else if (res.data == "2") {
+
+      } else if (res.data == "3") {
+
+      } else if (res.data == "4") {
+
+      } else if (res.data == "5") {
+
+      }
+      else {
+        //登录成功
+        wx.setStorageSync("cookie", res.data);
+
+        //获取个人信息
+        user.requestInfo();
+        //测试使用获得的cookie
+        /*httpRequest.getRequest("https://www.v2ex.com/recent?p=2", '', (cb: any) => {
+          console.log(cb.data);
+        }, "GET");*/
+      }
       //console.log(postData);
     }, "POST", "application/x-www-form-urlencoded");
 

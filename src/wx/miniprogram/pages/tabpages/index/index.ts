@@ -5,12 +5,15 @@ import { UtilTime } from '../../../utils/util_time';
 import { Cache } from '../../../utils/cache';
 import { TopicParser } from '../../../utils/topicparser';
 //import { RequestTopics } from '../../../core/net/requestTopics';
+import { User } from '../../../core/net/user';
 
 //const app = getApp<IMyApp>();
 
 let utilTime = new UtilTime();
 let cache = new Cache();
 let parser = new TopicParser();
+let user=new User();
+
 //let requestTopics=new RequestTopics();
 let sender: any;
 let topicList: ITopic[] = [];
@@ -91,9 +94,7 @@ Component({
       /*requestTopics.requestForHtml(pageIndex,(e:any)=>{
         console.log(e);
       });*/
-      wx.navigateTo({
-        url: '/pages/login/login'
-      });
+      user.requestInfo();
       (this as any).getTabBar().setData({
         selected: 0
       })
