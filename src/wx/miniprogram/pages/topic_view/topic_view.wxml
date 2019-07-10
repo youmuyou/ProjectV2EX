@@ -1,29 +1,42 @@
-<view class='container'>
+<view class='body'>
+  <view class='container'>
 
-  <view class='topic_title'>
-    <text>{{topic.title}}</text>
-  </view>
-  <view class='topic_member'>
-    <image lazy-load='true' class='topic_memberavatar' src='{{topic.member.avatar_normal}}'></image>
-    <text class='topic_membername'>{{topic.member.username}}</text>
-    <view class='topic_topinfo'>
-      <text class='topic_time'>{{topic.created}}</text>
-      <text class='topic_replies'>{{topic.replies}} 回复</text>
+    <view class='topic_title'>
+      <text>{{topic.title}}</text>
     </view>
-    <view class='topic_node'>#{{topic.node.title}}#</view>
-  </view>
-  <view class="topic_content">
-    <view class='topic_tip' wx:if="{{topic.content_rendered==''}}">没有正文内容</view>
-    <rich-text nodes="{{topic.content_rendered}}"></rich-text>
-    <view class='subtitle' wx:if="{{subtle.length>0}}">附言</view>
-    <view class='subtle' wx:for="{{subtle}}">
-      <view class='title'>
-        <rich-text nodes="{{item.title}}"></rich-text>
+    <view class='topic_member'>
+      <image lazy-load='true' class='topic_memberavatar' src='{{topic.member.avatar_normal}}'></image>
+      <text class='topic_membername'>{{topic.member.username}}</text>
+      <view class='topic_topinfo'>
+        <text class='topic_time'>{{topic.created}}</text>
+        <text class='topic_replies'>{{topic.replies}} 回复</text>
       </view>
-      <view class='content'>
-        <rich-text nodes="{{item.content}}"></rich-text>
+      <view class='topic_node'>#{{topic.node.title}}#</view>
+    </view>
+    <view class="topic_content">
+      <view class='topic_tip' wx:if="{{!isHasContent}}">没有正文内容</view>
+      <rich-text nodes="{{topic.content_rendered}}"></rich-text>
+      <view class='subtitle' wx:if="{{subtle.length>0}}">附言</view>
+      <view class='subtle' wx:for="{{subtle}}">
+        <view class='title'>
+          <rich-text nodes="{{item.title}}"></rich-text>
+        </view>
+        <view class='content'>
+          <rich-text nodes="{{item.content}}"></rich-text>
+        </view>
       </view>
     </view>
   </view>
+  <comments topicId="{{topic.id}}" topicHtml="{{html}}" topicComments="{{topic.replies}}" />
+
+<!--
+  <view class='discuss' animation="{{discussAnimationData}}">
+    <view class='input' animation="{{inputAnimationData}}">
+      <input bindfocus="onDiscussFocus" bindblur="onDiscussLostFocus" placeholder="发布评论" value='{{discussText}}'></input>
+    </view>
+
+    <view class='action'>
+      <button class='btn-post' bindtap='onPostDiscuss'>回复</button>
+    </view>
+  </view>-->
 </view>
-<comments topicId="{{topic.id}}" topicHtml="{{html}}" topicComments="{{topic.replies}}" />

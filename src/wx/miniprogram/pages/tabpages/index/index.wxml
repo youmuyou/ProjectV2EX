@@ -1,22 +1,15 @@
-<!--index.wxml-->
-<!--view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
-</view-->
+<view class='body'>
+  <view class='header'>
+    <text class="nav_title">{{navTitle}}</text>
+    <view>
+      <image bindtap='onFilter' src='../../../images/{{filter?"filter_on.svg":"filter_off.svg"}}'></image>
+    </view>
 
-<view>
-  <text class="nav_title">{{navTitle}}</text>
+  </view>
+
   <view class="container">
     <view id="home_page">
-      <!--帖子item-->
+      <!--帖子item开始-->
       <view class='topic_item' data-id='{{index}}' wx:for="{{home_topics}}" bindtap='showTopic'>
         <view class='topic_avatar'>
           <!--头像-->
@@ -38,20 +31,11 @@
           </view>
         </view>
       </view>
+      <!--帖子item结束-->
+      <!--加载动画开始-->
+      <button class='btn-load' wx:if="{{!filter && !isLoading}}" form-type="button" bindtap="loadmore">加载更多</button>
+      <!--加载动画结束-->
+
     </view>
   </view>
-  <!--<view class="navbar">
-    <button bindtap="bindViewTap" id='home'>
-      <image src="{{home_image}}"></image>
-    </button>
-    <button bindtap="bindViewTap" id='hot'>
-      <image src="{{hot_image}}"></image>
-    </button>
-    <button bindtap="bindViewTap" id='msg'>
-      <image src="{{msg_image}}"></image>
-    </button>
-    <button bindtap="bindViewTap" id='me'>
-      <image src="{{me_image}}"></image>
-    </button>
-  </view>-->
 </view>

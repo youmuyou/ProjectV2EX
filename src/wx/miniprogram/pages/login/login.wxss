@@ -1,1 +1,33 @@
 /* miniprogram/pages/login/login.wxss */
+.section{
+  margin: 0 40rpx;
+}
+.section__title{
+  color: #2d2d2d;
+}
+input{
+  height: 1.7rem;
+  border-bottom: 1px solid #d2d2d277;
+}
+
+.checkcode{
+  width: 400rpx;
+  height: 100rpx;
+  border-radius: 6rpx;
+}
+button{
+  margin: 0 40rpx;
+}
+.btn-login{
+  border: 0;
+  border-radius: 0;
+  background: #ffc803;
+  color: #fff;
+  font-size: 36rpx;
+  padding: 30rpx 0;
+  line-height: initial;
+}
+.btn-login::after {
+  border-radius: 0;
+  border: 0;
+}

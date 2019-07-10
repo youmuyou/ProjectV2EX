@@ -1,3 +1,7 @@
+.body {
+  padding-bottom: 40px;
+}
+
 .container {
   padding: 40rpx;
 }
@@ -39,34 +43,91 @@
 .topic_img {
   max-width: 100%;
 }
-.topic_tip{
+
+.topic_tip {
   background: #fffbe6;
   color: #5c3b00;
   font-size: 25rpx;
   padding: 10rpx;
 }
-.topic_replies{
+
+.topic_replies {
   display: inline-block;
   font-size: 25rpx;
   color: #ffc803;
   margin-left: 16rpx;
 }
-.topic_topinfo{
+
+.topic_topinfo {
   text-align: center;
 }
-.topic_node{
+
+.topic_node {
   font-size: 25rpx;
   color: #296089;
 }
-.subtle{
+
+.subtle {
   background: #fffbe6;
   border: 2prx solid #fff5c2;
   color: #5c3b00;
   padding: 10rpx;
   margin-bottom: 10rpx;
 }
-.subtitle{
+
+.subtitle {
   font-size: 35rpx;
   font-weight: bold;
   padding: 20rpx 0;
+}
+
+.discuss {
+  background: #fff;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  
+  border-top: 1px solid #c8c8c8;
+  width: 100%;
+  background: #f7f9fa;
+}
+
+.input {
+  height: 40px;
+}
+
+.input input {
+  font-size: 35rpx;
+  margin: 0 10px;
+  height: 100%;
+}
+
+.action {
+  margin-top: 8px;
+  overflow: hidden;
+  background: #fff;
+  padding: 10px 0;
+}
+
+.action button {
+  float: right;
+  margin-right: 10px;
+}
+
+.btn-post {
+  border: 0;
+  border-radius: 4px;
+  background: #ffc803;
+  color: #fff;
+  font-size: 30rpx;
+  height: 32px;
+  line-height: 32px;
+  width: 150rpx;
+}
+
+.btn-post::after {
+  border-radius: 4px;
+  border: 0;
 }

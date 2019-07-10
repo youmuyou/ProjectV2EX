@@ -1,63 +1,34 @@
-import { UtilTime } from '../../../utils/util_time';
 import { Cache } from '../../../utils/cache';
+import { RequestTopics } from '../../../core/net/requestTopics';
 
-let utilTime = new UtilTime();
 let cache = new Cache();
+let requestTopics = new RequestTopics();
 
 let sender: any;
-let topicList: ITopic[] = [];
-let pageIndex: number = 1;
 
-function getTopics(page: number) {
-  console.log("正在加载帖子内容" + page);
-  wx.request({
-    // url: 'https://www.v2ex.com/recent?p=' + page,
-    url: 'https://www.v2ex.com/api/topics/hot.json',
-
-    header: {
-      'content-type': 'application/json' // 默认值
-    },
-    success(res) {
-      let data: any = res.data;
-      console.log("加载帖子内容完成");
-      //parser.matchTopics(data);
-      //return;
-      let length: number = data.length;
-      for (let i = 0; i < length; i++) {
-        //data[i]["created"] = utilTime.getDateDiff(data[i]["created"]);
-        let created: string = utilTime.getDateDiff(data[i]["created"]);
-
-        let node: INode = {
-          title: data[i]["node"]["title"]
-        }
-        let member: IMember = {
-          username: data[i]["member"]["username"],
-          avatar_normal: data[i]["member"]["avatar_normal"]
-
-        }
-        let t: ITopic = {
-          id: data[i]["id"],
-          created: created,
-          title: data[i]["title"],
-          replies: data[i]["replies"],
-          node: node,
-          member: member,
-          content_rendered: data[i]["content_rendered"]
-        };
-        topicList.push(t);
-      }
-      sender.setData({ home_topics: topicList });
-      // console.log(data)
-    }
-  })
+let isLoading = true;
+function SetLoading(sw: boolean) {
+  isLoading = sw;
+  if (sw) {
+    wx.showLoading({
+      title: '加载中',
+    });
+  }
+  else {
+    wx.hideLoading();
+  }
+  return isLoading;
 }
 Component({
   data: {
-
-    navTitle: '最热',
+    navTitle: '热议',
     home_topics: []
   },
   methods: {
+    onPullDownRefresh: function () {
+      wx.stopPullDownRefresh();
+      getRequestTopics();
+    },
     showTopic: function (e: any) {
       let itemIndex: any = e.currentTarget.dataset.id;
 
@@ -70,36 +41,27 @@ Component({
       console.log(sender.data.home_topics[itemIndex]);
     }
   },
+  lifetimes: {
+    created: function () {
+      sender = this;
+      getRequestTopics();
+    }
+  },
   pageLifetimes: {
     show: function () {
-
-      sender = this;
-
-      topicList = [];
-      getTopics(pageIndex);
-
-      (this as any).getTabBar().setData({
+      sender.getTabBar().setData({
         selected: 1
       })
-
     }
   }
 })
 
-
-interface ITopic {
-  id: number;
-  title: string;
-  replies: number;
-  created: string;
-  node: INode;
-  member: IMember;
-  content_rendered: string;
-}
-interface INode {
-  title: string;
-}
-interface IMember {
-  username: string;
-  avatar_normal: string;
+function getRequestTopics(){
+  SetLoading(true);
+  requestTopics.requestHotForJson((e: any) => {
+    sender.setData({
+      home_topics: e
+    });
+    SetLoading(false);
+  });
 }

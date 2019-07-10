@@ -1,4 +1,29 @@
 /**index.wxss**/
+.body{
+  padding-bottom: 60rpx;
+}
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.header text {
+  display: flex;
+  flex: 1;
+  padding-right: 40rpx;
+}
+
+.header view {
+  display: flex;
+  flex: 1;
+}
+
+.header image {
+  width: 56rpx;
+  height: 56rpx;
+  margin-left: auto;
+  margin-right: 40rpx;
+}
 
 .userinfo {
   display: flex;
@@ -51,9 +76,6 @@
   height: 100%;
 }
 
-
-
-
 /*帖子样式*/
 
 .topic_item {
@@ -84,8 +106,7 @@
 .topic_content {
   flex: 1;
   width: 0;
- 
-  margin: 0 20rpx;
+  margin-left: 20rpx;
   /*flex-wrap: wrap;*/
 }
 
@@ -93,25 +114,29 @@
   font-size: 30rpx;
   margin-top: 16rpx;
 }
-.topic_info view{
+
+.topic_info view {
   display: inline-block;
 }
-.topic_node{
-  
+
+.topic_node {
   background: #f6f6f6;
   border-radius: 2rpx;
-  padding:4rpx 6rpx;
+  padding: 4rpx 6rpx;
   color: #aaa;
 }
-.topic_member{
+
+.topic_member {
   margin-left: 8rpx;
   color: #4d5256;
 }
-.topic_time{
+
+.topic_time {
   margin-left: 8rpx;
   color: #aaa;
 }
-.topic_replies{
+
+.topic_replies {
   float: right;
   background: #ffc803;
   color: white;
@@ -119,4 +144,21 @@
   text-align: center;
   border-radius: 6rpx;
   padding: 0 4rpx;
+}
+
+.btn-load {
+  margin-top: 100rpx;
+  background: #ffc803;
+  color: #fff;
+  font-size: 36rpx;
+  padding: 30rpx 0;
+  line-height: initial;
+  border-radius: 0;
+  border: 0;
+  margin: 0 40rpx;
+}
+
+.btn-load::after {
+  border-radius: 0;
+  border: 0;
 }

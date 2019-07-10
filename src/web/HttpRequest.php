@@ -37,7 +37,7 @@ class HttpRequest
         }
         curl_setopt($curl, CURLOPT_URL, $_url);
         curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/18.17763');
-        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
+        //curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
         curl_setopt($curl, CURLOPT_AUTOREFERER, 1);
         curl_setopt($curl, CURLOPT_HEADER, 1);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
@@ -60,6 +60,7 @@ class HttpRequest
                 }
                 $headerCookie = substr($cookiestr, 0, strlen($cookiestr) - 2);
             }
+            unlink($_cookieSave);
         } else {
             preg_match('/Set-Cookie: (.*?)\n/', $header, $matches);
             $headerCookie = $matches && count($matches) >= 2 ? $matches[1] : '';

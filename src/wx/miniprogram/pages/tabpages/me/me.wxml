@@ -1,8 +1,61 @@
 <view>
-  <text class="nav_title">{{navTitle}}</text>
   <view class="container">
-    <view wx:if="{{isLogin==false}}">
-      <button form-type="button" bindtap="gotologin">登录</button>
+    <view class='v2ex' wx:if="{{isLogin==false}}">
+      <view class='v2exlogo'>
+        V2EX :)
+      </view>
+
+      <view class='v2extext'>
+        获得灵感，分享想法，找到伙伴
+      </view>
+      <button class='btn-login' form-type="button" bindtap="gotologin">登 录</button>
+    </view>
+    <view wx:if="{{isLogin}}">
+      <!--基本信息-->
+      <view class="userinfo">
+        <image src="{{info.avatar_normal}}"></image>
+        <text>{{info.username}}</text>
+      </view>
+      <view class='t2'></view>
+      <!--额外信息-->
+      <view class='other'>
+        <view class="userotherinfo">
+          <view class="item">
+            <text class='bigger'>{{info.mynodes}}</text>
+          </view>
+          <view class="item">
+            <text class='bigger'>{{info.mytopics}}</text>
+          </view>
+          <view class="item">
+            <text class='bigger'>{{info.myfollowing}}</text>
+          </view>
+        </view>
+        <view class="userotherinfo">
+          <view class="item">
+            <text class='name'>节点收藏</text>
+          </view>
+          <view class="item">
+            <text class='name'>主题收藏</text>
+          </view>
+          <view class="item">
+            <text class='name'>特别关注</text>
+          </view>
+        </view>
+      </view>
+      <!--操作-->
+      
+      <view class="actions_title">操作</view>
+      <view class='actions'>
+        <!--<view>
+          <image src='../../../images/write.svg'></image>
+          <text>发布帖子</text>
+        </view>-->
+         <view bindtap="onSignout">
+          <image src='../../../images/signout.svg'></image>
+          <text>退出登录</text>
+        </view>
+
+      </view>
     </view>
   </view>
 </view>

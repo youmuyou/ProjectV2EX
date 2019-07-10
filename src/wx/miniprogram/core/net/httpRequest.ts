@@ -8,7 +8,7 @@ export class HttpRequest {
     | 'PUT'
     | 'DELETE'
     | 'TRACE'
-    | 'CONNECT' = "GET", contentType: string = "text/html") {
+    | 'CONNECT' = "GET", contentType: string = "text/html", isSaveCookie: boolean = false) {
 
     let cookie: any = wx.getStorageSync("cookie");
     console.log('请求的url:' + url);
@@ -22,7 +22,8 @@ export class HttpRequest {
         'Cookie': cookie
       },
       success(res: any) {
-        /*if (addCookie) {
+        if (isSaveCookie) {
+          console.log("保存cookie");
           if (res.header) {
             if ('Set-Cookie' in res.header) {
               wx.setStorageSync("cookie", res.header['Set-Cookie']);
@@ -31,9 +32,11 @@ export class HttpRequest {
               wx.setStorageSync("cookie", res.header['set-cookie'])
             }
           }
-        }*/
+        }
+        
         callBack(res);
       }
     })
   }
+
 }

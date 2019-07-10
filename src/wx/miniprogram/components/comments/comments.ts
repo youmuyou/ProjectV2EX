@@ -157,6 +157,7 @@ function GetPageComments(page: number) {
     GetHtmlComments(sender.properties.topicHtml.toString());
   }
   else {
+    console.log('>>>>');
     wx.request({
       url: 'https://www.v2ex.com/t/' + sender.properties.topicId + "?p=" + page,
       header: {
@@ -169,7 +170,7 @@ function GetPageComments(page: number) {
   }
 }
 function GetHtmlComments(html: string) {
-  console.log(html);
+  //console.log(html);
   let commentReg: any = /<div id="(.*?)" class="(cell|inner)">([\s\S]*?)<\/table>/g;
   let commentArray: any[] | null = html.match(commentReg);
   if (commentArray != null) {

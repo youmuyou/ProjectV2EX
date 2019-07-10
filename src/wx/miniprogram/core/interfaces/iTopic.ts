@@ -1,5 +1,5 @@
 
-interface iTopic{
+interface ITopic{
   id: number;
   title: string;
   replies: number;

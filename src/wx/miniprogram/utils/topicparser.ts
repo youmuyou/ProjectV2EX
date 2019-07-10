@@ -45,19 +45,72 @@ export class TopicParser {
     return href;
   }
 
-  matchTopics(html: string) {
+  getMatchTopics(html: string): ITopic[] {
     console.log("正在匹配帖子列表");
-    //console.log(html);
-    let Reg: any = /<div class="cell item">([\s\S]*?)<\/div>/g;
+    let topicList: ITopic[] = [];
+    let Reg: any = /<table cellpadding="0" cellspacing="0" border="0" width="100%">([\s\S]*?)<\/table>/g;
 
     let dataArray: any[] | null = html.match(Reg);
     if (dataArray != null) {
       dataArray.forEach((item: any) => {
-        console.log(item);
+        if (item.indexOf("id=\"LogoMobile\"") == -1 &&
+          item.indexOf("class=\"super normal button\"") == -1) {
+          console.log(item);
+          //ID
+          let idReg: any = /<a href="\/t\/([0-9]{2,10})(.*?)">/g;
+          let id = idReg.exec(item)[1];
+          //标题
+          let titleReg: any = /<span class="item_title"><a(.*?)>([\s\S]*?)<\/a><\/span>/g;
+          let title = titleReg.exec(item)[2];
+          //头像
+          let avatarReg: any = /<img loading="lazy" src="(.*?)"(.*?)>/g;
+          let avatar = "https:"+avatarReg.exec(item)[1];
+          //节点名称
+          let nodeReg: any = /<a class="node"(.*?)>(.*?)<\/a>/g;
+          let node = nodeReg.exec(item)[2];
+          //用户
+          let memberReg: any = /<a href="\/member\/(.*?)"><img/g;
+          let member = memberReg.exec(item)[1];
+          //时间
+          let timeReg: any = /<span class="small fade">(.*?)前/g;
+          let time = timeReg.exec(item)[1] + "前";
+          time = time.replace(/\s/g, "");
+          //回复数
+          let replysHtmlReg: any = /<td width="70" align="right" valign="middle">([\s\S]*?)<\/td>/g;
+          let replysHtml = replysHtmlReg.exec(item)[1];
+          let replys = 0;
+          if (replysHtml.length > 5) {
+            //有回复
+            let replysReg: any = /<a(.*?)>(.*?)<\/a>/g;
+            replys = replysReg.exec(replysHtml)[2];
+          }
+          let topicMember: IMember = {
+            username: member,
+            avatar_normal: avatar
+
+          }
+          let topicNode: INode = {
+            title: node
+          }
+          let t: ITopic = {
+            id: id,
+            created: time,
+            title: title,
+            replies: replys,
+            node: topicNode,
+            member: topicMember,
+            content_rendered: ''
+          };
+          topicList.push(t);
+
+          console.log("ID：" + id + "，" +"标题：" + title + "，" + "头像：" + avatar + "，" + "节点：" + node + "，" + "用户：" + member + "，" + "时间：" + time + "，" + "回复：" + replys);
+
+        }
       });
     }
-    else{
+    else {
       console.log("匹配不到任何帖子");
     }
+    return topicList;
   }
 }

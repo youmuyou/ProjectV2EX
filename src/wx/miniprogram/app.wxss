@@ -20,6 +20,18 @@
   padding-bottom: 48px;
 }
 
+.t1{
+  height: 10rpx; 
+}
+.t2{
+  height: 16rpx; 
+}
+.t4{
+  height: 40rpx; 
+}
+.t6{
+  height: 60rpx; 
+}
 /*markdown样式*/
 
 .md_t1 {

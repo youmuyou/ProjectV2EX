@@ -1,25 +1,31 @@
-<view>登录到V2EX</view>
-
-<form bindsubmit="formSubmit">
+<view class='t4'></view>
+<view class='t4'></view>
+<text class='nav_title'>登录到V2EX</text>
+<view class='t4'></view>
+<view class='t4'></view>
+<form bindsubmit="formSubmit" class='loginbody'>
 
   <view class="section">
     <view class="section__title">用户名</view>
     <input name="username" placeholder="请输入用户名" />
   </view>
-
+  <view class='t4'></view>
   <view class="section">
     <view class="section__title">密码</view>
     <input name="password" placeholder="请输入密码" />
   </view>
+  <view class='t4'></view>
+
   <view class="section">
     <view class="section__title">
-      <image wx:if='{{checkcode!=""}}' src='{{checkcode}}'></image>
-      <image wx:if='{{checkcode==""}}' src='../../images/captcha.png'></image>
+      <image class='checkcode' wx:if='{{checkcode!=""}}' src='{{checkcode}}' bindtap="onRefCheckCode"></image>
+      <image class='checkcode' wx:if='{{checkcode==""}}' src='../../images/captcha.png'></image>
     </view>
     <input name="checkcode" placeholder="请输入验证码" />
   </view>
+  <view class='t4'></view>
+
   <view class="btn-area">
-    <button form-type="submit">登录</button>
-     <button form-type="button" bindtap="updateInfo">刷新页面</button>
+    <button class='btn-login' form-type="submit">登 录</button>
   </view>
 </form>
