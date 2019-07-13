@@ -1,4 +1,4 @@
-## Project V2EX
+# Project V2EX
 
 V2EX的非官方小程序，更舒服的浏览（摸鱼）体验。
 
