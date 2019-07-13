@@ -19,21 +19,42 @@ Component({
         content: '是否确认退出？',
         success(res) {
           if (res.confirm) {
-            user.signOut();
-            wx.navigateTo({
-              url: '/pages/login/login'
+            user.signOut((success: boolean) => {
+              if (success) {
+                wx.navigateTo({
+                  url: '/pages/login/login'
+                });
+              }
+              else {
+                wx.showToast({
+                  title: "退出操作失败，请重试",
+                  icon: 'none',
+                  duration: 4000
+                })
+              }
+
             });
+
           }
         }
+      });
+    }
+    , onPost: function () {
+      wx.navigateTo({
+        url: '/pages/topic_post/topic_post'
+      });
+    }
+    , onShowPage: function (e: any) {
+      let page = e.currentTarget.dataset.page;
+      wx.navigateTo({
+        url: page
       });
     }
   },
   pageLifetimes: {
     show: function () {
       sender = this;
-      sender.getTabBar().setData({
-        selected: 3
-      });
+      
       sender.setData({
         isLogin: user.isLogin()
       });

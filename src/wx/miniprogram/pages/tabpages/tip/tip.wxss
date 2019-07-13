@@ -1,1 +1,45 @@
-/* pages/tabpages/tip/tip.wxss */
+.container{
+  margin-top: 10px;
+}
+.notification{
+  padding: 20rpx 40rpx;
+  border-bottom: 1px solid #f7f9fa;
+}
+.notification:hover{
+  background: #f7f9fa9c;
+}
+.info{
+  font-size: 30rpx;
+  margin-top: 10px;
+  background: #f7f9fa;
+  padding: 20rpx;
+  border-radius: 4rpx;
+}
+.action{
+  margin-top: 10px;
+  font-size: 30rpx;
+  color: #353535;
+}
+.member{
+  overflow: hidden;
+}
+.avatar{
+  float: left;
+}
+.avatar image{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 6rpx;
+}
+.username{
+  float: left;
+  color: #353535;
+  margin-left: 10px;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.time{
+  color: #ccc;
+  font-size: 30rpx;
+  float: right;
+}

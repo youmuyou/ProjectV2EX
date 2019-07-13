@@ -1,8 +1,10 @@
+
 Component({
   data: {
     selected: 0,
     color: "#2c2c2c",
     selectedColor: "#ffc803",
+    tips: 0,
     list: [{
       pagePath: "/pages/tabpages/index/index",
       iconPath: "/images/home.png",
@@ -25,7 +27,6 @@ Component({
       text: "我"
     }]
   },
-  attached() { },
   methods: {
     switchTab: function (e: any) {
       let data: any = e.currentTarget.dataset;
@@ -37,7 +38,9 @@ Component({
       sender.setData({
         selected: data.index
       })
-      console.log(url);
     }
   }
+
 })
+
+

@@ -53,7 +53,7 @@
   font-size: 45rpx;
   font-weight: bold;
   padding: 30rpx 40rpx;
-  background: #f3f3f2;
+  background: #f7f9fa;
 }
 .actions {
 }
@@ -61,21 +61,24 @@
 .actions>view {
   display: flex;
   align-items: center;
-  padding: 20rpx 40rpx;
+  padding: 30rpx 40rpx;
   /*box-shadow: 0px 0px 15px rgba(182, 182, 182, 0.199);*/
   border-bottom: 1rpx solid rgba(182, 182, 182, 0.089);
 }
-
+.actions>view:hover{
+  background: #f7f9fa;
+}
 .actions>view>image {
   display: flex;
   width: 50rpx;
   height: 50rpx;
+  flex: 1;
 }
 
 .actions>view>text {
   display: flex;
-  margin-left: 15rpx;
   color: #2c2c2c;
+  flex: 9;
 }
 
 .v2ex {

@@ -5,10 +5,12 @@
     "pages/tabpages/tip/tip",
     "pages/tabpages/me/me",
     "pages/topic_view/topic_view",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/topic_post/topic_post",
+    "pages/topic_mark/topic_mark"
   ],
   "tabBar": {
-    "custom": true,
+    "custom": false,
     "color": "#7A7E83",
     "selectedColor": "#3cc51f",
     "borderStyle": "black",
@@ -18,25 +20,25 @@
         "pagePath": "pages/tabpages/index/index",
         "iconPath": "/images/home.png",
         "selectedIconPath": "/images/home_active.png",
-        "text": "最新"
+        "text": ""
       },
       {
         "pagePath": "pages/tabpages/hot/hot",
         "iconPath": "/images/hot.png",
         "selectedIconPath": "/images/hot_active.png",
-        "text": "热榜"
+        "text": ""
       },
       {
         "pagePath": "pages/tabpages/tip/tip",
         "iconPath": "/images/tip.png",
         "selectedIconPath": "/images/tip_active.png",
-        "text": "提醒"
+        "text": ""
       },
       {
         "pagePath": "pages/tabpages/me/me",
         "iconPath": "/images/me.png",
         "selectedIconPath": "/images/me_active.png",
-        "text": "我"
+        "text": ""
       }
     ]
   },

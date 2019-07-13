@@ -1,16 +1,13 @@
 <view class='body'>
   <view class='header'>
-    <text class="nav_title">{{navTitle}}</text>
-    <view>
-      <image bindtap='onFilter' src='../../../images/{{filter?"filter_on.svg":"filter_off.svg"}}'></image>
-    </view>
+    <text class="nav_title">我收藏的主题</text>
 
   </view>
 
   <view class="container">
     <view id="home_page">
       <!--帖子item开始-->
-      <view class='topic_item' data-id='{{index}}' wx:for="{{home_topics}}" wx:key="id" bindtap='showTopic'>
+      <view class='topic_item' data-id='{{index}}' wx:for="{{topics}}" bindtap='onShowTopic'>
         <view class='topic_avatar'>
           <!--头像-->
           <image lazy-load='true' src='{{item.member.avatar_normal}}'></image>
@@ -33,7 +30,7 @@
       </view>
       <!--帖子item结束-->
       <!--加载动画开始-->
-      <button class='btn-load' wx:if="{{!filter && !isLoading}}" form-type="button" bindtap="loadmore">加载更多</button>
+      <button class='btn-load' wx:if="{{isHasMore}}" form-type="button" bindtap="onLoadMore">加载更多</button>
       <!--加载动画结束-->
 
     </view>

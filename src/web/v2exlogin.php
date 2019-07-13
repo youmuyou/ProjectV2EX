@@ -16,7 +16,7 @@ unset($data['cookie']);
 
 $cookiePath = dirname(__FILE__) . '/cookie.txt';
 
-$requestResult = HttpRequest::getRequest($url, $data, $referer, true, $cookie, null);
+$requestResult = HttpRequest::getRequest($url, $data, $referer, true, $cookie, $cookiePath);
 
 if (strpos($requestResult['result'], '用户名和密码无法匹配') !== false) {
     echo 0;

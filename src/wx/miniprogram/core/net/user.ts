@@ -1,5 +1,8 @@
 import { HttpRequest } from '../../core/net/httpRequest';
+import { TopicParser } from '../../utils/topicparser';
+
 let httpRequest = new HttpRequest();
+let parser = new TopicParser();
 
 export class User {
   isLogin(): boolean {
@@ -22,37 +25,43 @@ export class User {
   /**
    * 退出登录，目前只是清除本地cookie，并非请求v2ex登出
    */
-  signOut() {
-    //清除个人信息
-    wx.removeStorageSync("userInfo");
-    //清除cookie
-    wx.removeStorageSync("cookie");
+  signOut(callback: any = null) {
+    let once = wx.getStorageSync("once");
+    httpRequest.getRequest("https://www.v2ex.com/signout?once=" + once, null, (res: any) => {
+      let isSuccess: boolean = false;
+      if (res.data.indexOf("你已经完全登出，没有任何个人信息留在这台电脑上。") != -1) {
+        isSuccess = true;
+        //清除个人信息
+        wx.removeStorageSync("userInfo");
+        //清除cookie
+        wx.removeStorageSync("cookie");
+      }
+      if (callback != null) {
+        callback(isSuccess);
+      }
+
+    }, "GET");
+
   }
   /**
    * 请求当前用户用户名，用于判断是否登录
    */
   requestUserName(callback: any = null) {
-    console.log("正在获取个人信息");
     httpRequest.getRequest("https://www.v2ex.com/settings", '', (e: any) => {
-      let result=false;
+      let result = false;
       if (e.data.indexOf("你要查看的页面需要先登录") != -1) {
+        //未登录
         wx.removeStorageSync("userInfo");
-        console.log("未登录");
-        
       } else if (e.data.indexOf("在短时间内的登录尝试次数太多，目前暂时不能继续尝试") != -1) {
-        // wx.removeStorageSync("userInfo");
-        console.log("登录受限");
-
+        //登录受限
       }
       else {
-        //console.log(e.data);
         let formReg: any = /<form method="post" action="\/settings">([\s\S]*?)<\/form>/g;
         let formHtml = formReg.exec(e.data)[1];
         let trReg = /<tr>([\s\S]*?)<\/tr>/g;
         let trArray: string[] = formHtml.match(trReg);
         if (trArray.length > 0) {
-          console.log("已匹配到了个人信息");
-          //console.log(trArray);
+          //已登录
           let usernameReg: any = /<td width="auto" align="left">(.*?)<\/td>/g;
 
           let member: IMember = {
@@ -60,7 +69,7 @@ export class User {
             avatar_normal: ''
           }
           wx.setStorageSync("userInfo", member);
-          console.log("获取一次验证码");
+          //获取once
           let once = "";
           let reg: any = /<input(.*?)value="(.*?)" name="once"/g;
           let onceReg = reg.exec(e.data);
@@ -69,17 +78,15 @@ export class User {
           }
           if (once != "") {
             wx.setStorageSync("once", once);
-            console.log("once:" + once);
           }
           result = true;
         }
         else {
-          console.log("匹配失败");
-
+          //获取个人信息失败，可能是网站发生了变化
         }
 
       }
-      if(callback!=null){
+      if (callback != null) {
         callback(result);
       }
     }, "GET");
@@ -108,7 +115,7 @@ export class User {
       let followingReg: any = /<a href="\/my\/following" class="dark" style="display: block;">([\s\S]*?)<\/a>/g;
       let followingHtml = followingReg.exec(e.data)[1];
       let following = biggerReg.exec(followingHtml)[1];
-      console.log("头像：" + avatar + ",节点收藏：" + nodes + ",主题收藏：" + topics + ",特别关注：" + following);
+      //console.log("头像：" + avatar + ",节点收藏：" + nodes + ",主题收藏：" + topics + ",特别关注：" + following);
       let userInfo = this.getInfo();
       if (userInfo != null) {
         let member: IMember = {
@@ -128,13 +135,115 @@ export class User {
    * 提交评论
    */
   postDiscuss(id: number, content: string, once: number, callback: any) {
-    let postdata = {
-      content: content,
-      once: once,
-    };
+    let postdata: any = {};
+    postdata["content"] = content;
+    postdata["once"] = once;
     console.log(postdata);
-    httpRequest.getRequest("https://www.v2ex.com/t/" + id, postdata, (e: any) => {
-      callback(e);
+    httpRequest.getRequest("https://www.v2ex.com/t/" + id, postdata, (res: any) => {
+      if (res.data.indexOf("<div class=\"problem\">创建新回复过程中遇到一些问题：<ul><li>你回复过于频繁了，请稍等") != -1) {
+        callback(false, "回复过于频繁，已被限制");
+      }
+      else if (res.data.indexOf("type=\"submit\" value=\"回复主题\"") != -1) {
+        //没有成功
+        callback(false, "回复失败，请重试");
+      }
+      else {
+        //评论成功
+        callback(true, "回复成功");
+      }
+
     }, "POST", "application/x-www-form-urlencoded");
+  }
+
+  sendLove(id: number, callback: any) {
+    let once = wx.getStorageSync("once");
+    let postdata: any = {};
+    postdata["once"] = once;
+    //console.log(postdata);
+    httpRequest.getRequest("https://www.v2ex.com/thank/reply/" + id + "?once=" + once, postdata, (res: any) => {
+      //console.log(res);
+      callback(res.data.success);
+
+    }, "POST", "application/x-www-form-urlencoded");
+  }
+
+  /**
+   * 请求新的once
+   */
+  requestOnce() {
+    this.requestUserName();
+  }
+
+  postTopic(callback: any, node: string, title: string, content: string = "") {
+    let postdata: any = {};
+    let once = wx.getStorageSync("once");
+    postdata["content"] = content;
+    postdata["title"] = title;
+    postdata["once"] = once;
+    console.log(postdata);
+    httpRequest.getRequest("https://www.v2ex.com/new/" + node, postdata, () => {
+      //没法测试是否成功，怕被ban。。。
+      //console.log(res);
+      //console.log(res.data);
+      callback(true);
+
+    }, "POST", "application/x-www-form-urlencoded");
+  }
+  /**
+   * 获取我收藏的帖子
+   */
+  requestMyTopics(callback: any, page: number = 1) {
+    httpRequest.getRequest("https://www.v2ex.com/my/topics?p=" + page, "", (e: any) => {
+      let topics = parser.getMatchMarkTopics(e.data);
+      //获取当前页和最大页
+      let currentPageReg = /<a href=\"\/my\/topics\?p=([0-9]{1,10})\" class=\"page_current\">/g;
+      let currentPageRegRes = currentPageReg.exec(e.data);
+      let maxPageReg = /<input type=\"number\" class=\"page_input\"(.*?)max=\"(.*?)\"/g;
+      let maxPageRegRes = maxPageReg.exec(e.data);
+      let pageIndex: number = currentPageRegRes ? parseInt(currentPageRegRes[1]) : 1;
+      let maxPage: number = maxPageRegRes ? parseInt(maxPageRegRes[2]) : 1;
+      callback(topics, pageIndex, maxPage);
+    }, "GET");
+  }
+
+  /**
+   * 收藏主题
+   */
+  requestMarkTopic(token: string, isMark: boolean, callback: any) {
+    let action = isMark ? "favorite" : "unfavorite";
+    if (token != "") {
+      httpRequest.getRequest("https://www.v2ex.com/" + action + "/topic/" + token, null, (res: any) => {
+        callback(res);
+      }, "GET");
+    }
+    else {
+      callback(false);
+    }
+  }
+
+  /**
+   * 给主题发送爱心
+   */
+  sendTopicLove(token: string, callback: any) {
+    let postdata: any = {};
+    let start = token.indexOf("=") + 1;
+    postdata["t"] = token.substr(start, (token.length - start));
+    console.log(postdata);
+    httpRequest.getRequest("https://www.v2ex.com/thank/topic/" + token, postdata, (res: any) => {
+      //console.log(res);
+      callback(res);
+    }, "POST", "application/x-www-form-urlencoded");
+  }
+
+  /**
+   * 获取未读提醒数
+   */
+  requestTips(callback: any) {
+    httpRequest.getRequest("https://v2ex.com/more", null, (res: any) => {
+      let msgReg = /<title>(.*?)\(([0-9]{1,20})\)(.*?)<\/title>/g;
+      let msgRegRes = msgReg.exec(res.data);
+      let tips: number = msgRegRes ? parseInt(msgRegRes[2]) : 0;
+      callback(tips);
+    }, "GET");
   }
 }

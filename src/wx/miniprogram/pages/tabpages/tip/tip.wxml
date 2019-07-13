@@ -1,6 +1,20 @@
 <view>
-  <text class="nav_title">{{navTitle}}</text>
+  <text class="nav_title">通知</text>
   <view class="container">
-
+    <view class='notification' wx:for="{{notifications}}" data-index='{{index}}' bindtap='onShowTopic'>
+      <view class='member'>
+        <view class='avatar'>
+          <image src='{{item.avatar}}'></image>
+        </view>
+        <view class='username'>{{item.username}}</view>
+        <view class='time'>{{item.time}}</view>
+      </view>
+      <view class='action'>
+        {{item.action}}
+      </view>
+      <view class='info' wx:if="{{item.info!=''}}">
+        <rich-text nodes="{{item.info}}"></rich-text>
+      </view>
+    </view>
   </view>
 </view>

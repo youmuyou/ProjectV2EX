@@ -13,7 +13,7 @@ let utilTime = new UtilTime();
 export class RequestTopics {
 
   /**
-   * 获取html（已登录）
+   * 获取主题列表通过html（已登录）
    */
   requestForHtml(page: number, callBack: any) {
 
@@ -65,13 +65,13 @@ export class RequestTopics {
   }
 
   /**
-   * 获取热门帖子
+   * 获取热门主题列表
    */
   requestHotForJson(callBack: any) {
     wx.request({
       url: 'https://www.v2ex.com/api/topics/hot.json',
       header: {
-        'content-type': 'application/json' 
+        'content-type': 'application/json'
       },
       success(res) {
         let data: any = res.data;
@@ -103,4 +103,13 @@ export class RequestTopics {
       }
     })
   }
+
+  /**
+   * 获取一个主题的内容信息，返回ITopic结构
+   
+  getRequest(id: any, callback: any) {
+    httpRequest.getRequest(""+id,null,(res:any)=>{
+
+    },"GET");
+  }*/
 }

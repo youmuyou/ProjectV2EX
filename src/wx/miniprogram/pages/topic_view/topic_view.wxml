@@ -26,17 +26,31 @@
         </view>
       </view>
     </view>
+    <!--主题操作开始-->
+    <view class='topic_action' wx:if="{{isLogin}}">
+      <view bindtap='onAction' data-action='mark'>
+        <image src='../../images/mark_{{topic.isMark?"on":"off"}}.svg'></image>
+      </view>
+      <view bindtap='onAction' data-action='love'>
+        <image src='../../images/love_{{topic.isLove?"on":"off"}}.svg'></image>
+      </view>
+    </view>
+    <!--主题操作结束-->
+
   </view>
-  <comments topicId="{{topic.id}}" topicHtml="{{html}}" topicComments="{{topic.replies}}" />
+  
+  <comments isLoadComments="{{isLoadComments}}" topicId="{{topic.id}}" topicHtml="{{html}}" topicComments="{{topic.replies}}" bind:atevent="onAtEvent" topicCreater="{{topic.member.username}}"/>
 
-<!--
-  <view class='discuss' animation="{{discussAnimationData}}">
-    <view class='input' animation="{{inputAnimationData}}">
-      <input bindfocus="onDiscussFocus" bindblur="onDiscussLostFocus" placeholder="发布评论" value='{{discussText}}'></input>
-    </view>
 
-    <view class='action'>
-      <button class='btn-post' bindtap='onPostDiscuss'>回复</button>
-    </view>
-  </view>-->
+  <view wx:if="{{isLogin}}" class='discuss' animation="{{discussAnimationData}}">
+    <form bindsubmit="onPostDiscuss" class='loginbody'>
+      <view class='input' animation="{{inputAnimationData}}">
+        <input name="content" focus='{{isDiscussFocus}}' bindfocus="onDiscussFocus" bindblur="onDiscussLostFocus" placeholder="发布评论" value='{{discussText}}'></input>
+      </view>
+
+      <view class='action'>
+        <button class='btn-post' form-type="submit">回复</button>
+      </view>
+    </form>
+  </view>
 </view>

@@ -25,7 +25,9 @@
   border-bottom: 2rpx solid #e6e6e6;
   padding: 20rpx 40rpx;
 }
-
+.comment:hover{
+  background: #f7f9fa;
+}
 .info {
   overflow: hidden;
 }
@@ -42,28 +44,173 @@
   border-radius: 50%;
 }
 
-.other{
+.other {
   float: left;
   margin-left: 30rpx;
 }
-.username{
-  font-size: 30rpx;
-  display: block;
+.member{
+  display: flex;
+  align-items: center;
 }
-.time{
+.member view{
+  display: flex;
+}
+.username {
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.tag{
+  font-size: 26rpx;
+  background: #ffc803;
+  color: #fff;
+  border-radius: 2px;
+  margin-left: 5px;
+  padding: 0 6px;
+}
+.time {
   font-size: 25rpx;
   color: #ccc;
   display: block;
   margin-top: 10rpx;
 }
-.tip{
+
+.tip {
   font-size: 30rpx;
   text-align: center;
   padding: 40rpx;
   color: #5c3b00;
 }
-.index{
+
+.index {
   float: right;
   font-size: 25rpx;
   color: #5c3b00;
+}
+
+.love {
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+  color: #ccc;
+  margin-top: 10rpx;
+}
+.love image{
+  display: flex;
+  width: 40rpx;
+  height: 40rpx;
+}
+.love text{
+  display: flex;
+}
+.loved{
+  color: #ff0000;
+}
+.btn-load {
+  margin-top: 100rpx;
+  background: #ffc803;
+  color: #fff;
+  font-size: 36rpx;
+  padding: 30rpx 0;
+  line-height: initial;
+  border-radius: 0;
+  border: 0;
+  margin: 0 40rpx;
+}
+
+.btn-load::after {
+  border-radius: 0;
+  border: 0;
+}
+.more{
+  margin: 20px 0;
+}
+
+
+/*markdown样式*/
+
+.md_t1 {
+  font-size: 44rpx;
+  margin: 24rpx 0;
+}
+
+.md_t2 {
+  font-size: 40rpx;
+  margin: 24rpx 0;
+  border-bottom: 1rpx solid #f5f5f5;
+  padding-bottom: 12rpx;
+}
+
+.md_t3 {
+  font-size: 36rpx;
+  margin: 12rpx 0;
+}
+
+.md_t4 {
+  font-size: 34rpx;
+  margin: 24rpx 0;
+}
+
+.md_listitem {
+  margin-left: 4rpx;
+}
+
+.md_text {
+  font-size: 30rpx;
+  margin: 16rpx 0;
+}
+
+.md_pre {
+  font-size: 25rpx;
+  background: #f5f5f5;
+  margin: 20rpx 0;
+  padding: 6rpx;
+  max-width: 100%;
+  word-wrap: break-word;
+  white-space: pre;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+.md_blockquote {
+  text-indent: 2em;
+  margin: 8rpx 0;
+  background: #fff8dd;
+  padding: 8rpx;
+  font-size: 25rpx;
+  border-radius: 4rpx;
+}
+
+.md_blockquote .md_text {
+  font-size: 25rpx;
+}
+
+.md_link {
+  display: inline-block;
+  word-break: break-all;
+}
+.md_atlink{
+  display: inline-block;
+  word-break: break-all;
+  color: #296089;
+  font-weight: bold;
+}
+.embedded_image {
+  max-width: 100%;
+}
+
+
+.dialog{
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.342);
+  padding: 80rpx;
+  overflow-y: scroll;
+}
+.dialog_comments{
+  background: #fff;
+  padding: 10rpx;
+  border-radius: 10rpx;
 }

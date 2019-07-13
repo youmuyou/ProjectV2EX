@@ -1,0 +1,40 @@
+<view wx:if="{{node==''}}">
+  <view class='header'>
+    <text class="nav_title">请选择一个节点</text>
+  </view>
+  <view class='nodes'>
+    <button data-name='gts' data-title="全球工单系统" bindtap='onSelectNode'>全球工单系统</button>
+    <button data-name='qna' data-title="问与答" bindtap='onSelectNode'>问与答</button>
+    <button data-name='jobs' data-title="酷工作" bindtap='onSelectNode'>酷工作</button>
+
+    <button data-name='programmer' data-title="程序员" bindtap='onSelectNode'>程序员</button>
+    <button data-name='share' data-title="分享发现" bindtap='onSelectNode'>分享发现</button>
+    <button data-name='macos' data-title="macOS" bindtap='onSelectNode'>macOS</button>
+    <button data-name='create' data-title="分享创造" bindtap='onSelectNode'>分享创造</button>
+    <button data-name='apple' data-title="Apple" bindtap='onSelectNode'>Apple</button>
+    <button data-name='android' data-title="Android" bindtap='onSelectNode'>Android</button>
+    <button data-name='career' data-title="职场话题" bindtap='onSelectNode'>职场话题</button>
+     <button data-name='bb' data-title="宽带症候群" bindtap='onSelectNode'>宽带症候群</button>
+<button data-name='afterdark' data-title="天黑以后" bindtap='onSelectNode'>天黑以后</button>
+  </view>
+</view>
+
+<view wx:if="{{node!=''}}">
+  <view class='header'>
+    <text class="nav_title">创建新主题 > {{nodeTitle}}</text>
+  </view>
+  <view class='post'>
+    <form bindsubmit="formSubmit">
+
+      <view class="section">
+        <view class="section__title">标题</view>
+        <input name="title" placeholder="标题" />
+      </view>
+      <view class="section">
+        <view class="section__title">正文</view>
+        <textarea name="content" placeholder='可空'></textarea>
+      </view>
+      <button form-type="submit">创建主题</button>
+    </form>
+  </view>
+</view>

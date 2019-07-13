@@ -1,19 +1,22 @@
 <view class='splite'></view>
-
-<view wx:if="{{topicComments>0}}">
-
-  <view class='comments_info'>
-    {{topicComments}}条回复
-  </view>
-  <view class='comments' wx:if='{{topicComments>0}}'>
-    <view class='comment' wx:for="{{comments}}">
+<view class='dialog' bindtap='onCloseDialog' wx:if="{{isShowDialog}}">
+  <view class='dialog_comments'>
+    <view data-t='0' class='comment' wx:for="{{atComments}}" wx:key="index" bindtap='onAction' data-index='{{index}}'>
       <view class='info'>
         <view class='avatar'>
           <image src='{{item.avatar}}'></image>
         </view>
         <view class='other'>
-          <text class='username'>{{item.username}}</text>
+          <view class='member'>
+            <view class='username'>{{item.username}}</view>
+            <view wx:if="{{item.isCreater}}" class='tag'>Owner</view>
+          </view>
+
           <text class='time'>{{item.time}}</text>
+          <view class='love' wx:if="{{item.love>0}}">
+            <image src='../../images/love_{{item.ismylove?"on":"off"}}.svg'></image>
+            <text>{{item.love}}</text>
+          </view>
         </view>
         <view class='index'>#{{item.index}}</view>
       </view>
@@ -22,5 +25,39 @@
       </view>
     </view>
   </view>
+</view>
+<view wx:if="{{topicComments>0}}">
+
+  <view class='comments_info'>
+    {{topicComments}}条回复
+  </view>
+  <view class='comments' wx:if='{{topicComments>0}}'>
+    <view class='comment' wx:for="{{comments}}" wx:key="index" bindtap='onAction' data-index='{{index}}' data-t='1'>
+      <view class='info'>
+        <view class='avatar'>
+          <image src='{{item.avatar}}'></image>
+        </view>
+        <view class='other'>
+          <view class='member'>
+            <view class='username'>{{item.username}}</view>
+            <view wx:if="{{item.isCreater}}" class='tag'>Owner</view>
+          </view>
+
+          <text class='time'>{{item.time}}</text>
+          <view class='love' wx:if="{{item.love>0}}">
+            <image src='../../images/love_{{item.ismylove?"on":"off"}}.svg'></image>
+            <text>{{item.love}}</text>
+          </view>
+        </view>
+        <view class='index'>#{{item.index}}</view>
+      </view>
+      <view class='content'>
+        <rich-text nodes="{{item.content}}"></rich-text>
+      </view>
+    </view>
+  </view>
+</view>
+<view wx:if="{{isHasMore}}" class='more'>
+  <button class='btn-load' form-type="button" bindtap="onLoadComment">加载更多</button>
 </view>
 <view wx:if='{{topicComments<=0}}' class='tip'>目前没有回复</view>

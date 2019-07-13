@@ -23,7 +23,7 @@
           <view class="item">
             <text class='bigger'>{{info.mynodes}}</text>
           </view>
-          <view class="item">
+          <view class="item" bindtap='onShowPage' data-page='/pages/topic_mark/topic_mark'>
             <text class='bigger'>{{info.mytopics}}</text>
           </view>
           <view class="item">
@@ -34,7 +34,7 @@
           <view class="item">
             <text class='name'>节点收藏</text>
           </view>
-          <view class="item">
+          <view class="item" bindtap='onShowPage' data-page='/pages/topic_mark/topic_mark'>
             <text class='name'>主题收藏</text>
           </view>
           <view class="item">
@@ -43,16 +43,17 @@
         </view>
       </view>
       <!--操作-->
-      
+
       <view class="actions_title">操作</view>
       <view class='actions'>
-        <!--<view>
-          <image src='../../../images/write.svg'></image>
-          <text>发布帖子</text>
-        </view>-->
-         <view bindtap="onSignout">
-          <image src='../../../images/signout.svg'></image>
+        <view bindtap="onPost">
+          <text>创建新主题</text>
+          <image src='../../../images/right.svg'></image>
+
+        </view>
+        <view bindtap="onSignout">
           <text>退出登录</text>
+          <image src='../../../images/right.svg'></image>
         </view>
 
       </view>

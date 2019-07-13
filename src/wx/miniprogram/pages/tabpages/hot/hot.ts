@@ -49,9 +49,7 @@ Component({
   },
   pageLifetimes: {
     show: function () {
-      sender.getTabBar().setData({
-        selected: 1
-      })
+     
     }
   }
 })

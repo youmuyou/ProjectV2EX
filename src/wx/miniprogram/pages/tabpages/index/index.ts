@@ -32,7 +32,8 @@ Component({
     navTitle: '主页',
     home_topics: [],
     filter: true,
-    isLoading: true
+    isLoading: true,
+    isLogin: false
   },
   methods: {
     onPullDownRefresh: function () {
@@ -41,14 +42,10 @@ Component({
     },
     showTopic: function (e: any) {
       let itemIndex: any = e.currentTarget.dataset.id;
-
       cache.put("topic", sender.data.home_topics[itemIndex]);
-
       wx.navigateTo({
         url: '/pages/topic_view/topic_view'
       });
-
-      console.log(sender.data.home_topics[itemIndex]);
     },
     loadmore: function () {
       pageIndex++;
@@ -66,29 +63,40 @@ Component({
     },
     onFilter: function () {
       wx.showActionSheet({
-        itemList: ['查看最新', '查看最近'],
+        itemList: ['查看最新主题', '查看最近主题'],
         success(res) {
           if (res.tapIndex == 0) {
             sender.setData({
               filter: true
             });
             wx.showToast({
-              title: '当前浏览最新帖子',
+              title: '当前浏览最新主题',
               icon: 'none',
-              duration: 2000
+              duration: 4000
             })
+            loadTopics();
           }
           else if (res.tapIndex == 1) {
-            sender.setData({
-              filter: false
-            });
-            wx.showToast({
-              title: '当前浏览最近帖子',
-              icon: 'none',
-              duration: 2000
-            })
+            if (!user.isLogin()) {
+              wx.showToast({
+                title: '登录后才能查看最近的主题',
+                icon: 'none',
+                duration: 4000
+              })
+            }
+            else {
+              sender.setData({
+                filter: false
+              });
+              wx.showToast({
+                title: '当前浏览最近主题',
+                icon: 'none',
+                duration: 4000
+              })
+              loadTopics();
+            }
           }
-          loadTopics();
+
           console.log(res.tapIndex)
         },
         fail(res) {
@@ -99,9 +107,9 @@ Component({
   },
   pageLifetimes: {
     show: function () {
-      // 页面被展示
-      sender.getTabBar().setData({
-        selected: 0
+      //设置登录状态
+      sender.setData({
+        isLogin: user.isLogin()
       });
     },
   },

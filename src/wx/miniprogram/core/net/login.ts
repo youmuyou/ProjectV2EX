@@ -49,6 +49,7 @@ export class Login {
           /*httpRequest.getRequest(checkCodeUrl, null, (res: any) => {
             console.log(res);
           });*/
+          console.log("下载验证码携带的cookie:" + postData["cookie"]);
           wx.downloadFile({
             url: checkCodeUrl,
             header: {
@@ -59,6 +60,7 @@ export class Login {
               callback(false, null, null);
             },
             success(res) {
+              wx.removeStorageSync("cookie");
               console.log(res);
               if (res.statusCode === 200) {
                 callback(true, postData, res.tempFilePath);
@@ -126,7 +128,7 @@ export class Login {
 
         //获取个人信息
         user.requestUserName((res: boolean) => {
-            callback(res, msg);
+          callback(res, msg);
         });
         //测试使用获得的cookie
         /*httpRequest.getRequest("https://www.v2ex.com/recent?p=2", '', (cb: any) => {
@@ -137,5 +139,14 @@ export class Login {
       //console.log(postData);
     }, "POST", "application/x-www-form-urlencoded");
 
+  }
+
+  /**
+   * 小程序无法获得302请求的cookie所以暂时不能直接post
+   */
+  requestPostLogin(postData: any, callback: any) {
+    httpRequest.getRequest("https://www.v2ex.com/signin", postData, (res: any) => {
+      callback(res);
+    }, "POST", "application/x-www-form-urlencoded");
   }
 }

@@ -53,6 +53,10 @@ Page({
       loginData[loginInfo['codeKey']] = formData['checkcode'];
       //请求登录
       SetLoading(true);
+      /*login.requestPostLogin(loginData, (res: any) => {
+        console.log(res.data);
+      });
+      return;*/
       login.requestLoginPost(loginData, (e: any, c: any) => {
         SetLoading(false);
 
@@ -99,14 +103,14 @@ Page({
           success(res) {
             if (res.confirm) {
               sender.updateInfo();
-            } 
+            }
           }
         });
       }
       SetLoading(false);
     });
   },
-  onRefCheckCode:function(){
+  onRefCheckCode: function () {
     wx.showModal({
       title: '提示',
       content: '是否刷新验证码',

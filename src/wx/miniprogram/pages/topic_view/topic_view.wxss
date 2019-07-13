@@ -88,7 +88,6 @@
   left: 0;
   right: 0;
   height: 40px;
-  
   border-top: 1px solid #c8c8c8;
   width: 100%;
   background: #f7f9fa;
@@ -130,4 +129,27 @@
 .btn-post::after {
   border-radius: 4px;
   border: 0;
+}
+
+.topic_action {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  border-top: 1px solid #f7f9fa;
+  justify-content:center;
+  padding-top: 40rpx;
+}
+
+.topic_action view {
+  display: flex;
+}
+.topic_action view:hover{
+  background: #f7f9fa;
+}
+.topic_action view:nth-child(n+2){
+  margin-left: 20rpx;
+}
+.topic_action image {
+  width: 60rpx;
+  height: 60rpx;
 }

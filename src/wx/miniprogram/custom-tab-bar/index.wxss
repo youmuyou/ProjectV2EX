@@ -26,6 +26,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: relative;
 }
 
 .tab-bar-item cover-image {
@@ -35,4 +36,20 @@
 
 .tab-bar-item cover-view {
   font-size: 10px;
+}
+.tips{
+  position: absolute;
+  top: 15%;
+  right: 25%;
+  min-width: 16px;
+  max-height: 16px;
+  border-radius: 8px;
+  color: #fff;
+  background: #ff3b30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.count{
+  display: flex;
 }

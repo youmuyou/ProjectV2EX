@@ -9,6 +9,7 @@
   box-sizing: border-box;
 } 
 **/
+
 .nav_title {
   font-size: 50rpx;
   font-weight: bold;
@@ -17,27 +18,31 @@
 
 .container {
   display: block;
-  padding-bottom: 48px;
 }
 
-.t1{
-  height: 10rpx; 
+.t1 {
+  height: 10rpx;
 }
-.t2{
-  height: 16rpx; 
+
+.t2 {
+  height: 16rpx;
 }
-.t4{
-  height: 40rpx; 
+
+.t4 {
+  height: 40rpx;
 }
-.t6{
-  height: 60rpx; 
+
+.t6 {
+  height: 60rpx;
 }
+
 /*markdown样式*/
 
 .md_t1 {
   font-size: 44rpx;
   margin: 24rpx 0;
 }
+
 .md_t2 {
   font-size: 40rpx;
   margin: 24rpx 0;
@@ -90,8 +95,10 @@
 }
 
 .md_link {
-  word-break: break-word;
+  display: inline-block;
+  word-break: break-all;
 }
-.embedded_image{
+
+.embedded_image {
   max-width: 100%;
 }

@@ -1,0 +1,27 @@
+.nodes {
+  display: flex;
+  padding: 0 40rpx;
+  margin: 10px 0;
+  flex-wrap: wrap;
+}
+
+.nodes button {
+  display: flex;
+  font-size: 40rpx;
+  margin-bottom: 10px;
+}
+
+.post {
+  margin: 20px 40rpx;
+}
+
+.section{
+  margin: 10px 0;
+}
+.section__title{
+  color: #2d2d2d;
+}
+input{
+  height: 1.7rem;
+  border-bottom: 1px solid #d2d2d277;
+}
