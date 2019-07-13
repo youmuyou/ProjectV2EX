@@ -6,7 +6,7 @@ V2EX的非官方小程序，更舒服的浏览（摸鱼）体验。
 
 微信小程序搜索：Project V2EX或扫描下方小程序码
 
-![v2ex](https://raw.githubusercontent.com/thelittlepandaisbehind/ProjectV2EX/master/v2ex.jpg)
+![v2ex](https://github.com/thelittlepandaisbehind/ProjectV2EX/raw/master/v2ex.jpg)
 
 ## 已实现的基础功能
 
@@ -19,4 +19,4 @@ V2EX的非官方小程序，更舒服的浏览（摸鱼）体验。
 
 ## 声明
 
-登录时会将您的用户名密码明文传输到我的服务器去处理，但是并不会保存！因为小程序的wx.request API不提供http 302状态的返回处理，登录时如果直接用小程序去post V2EX是无法获取到正确的cookie的，所以要经过我的服务器中转获得。服务器的处理代码请看：/src/web/v2exlogin.php。除了登录所需要的中转请求接口外，其他的功能都是直接使用V2EX的，请放心使用。
+登录时会将您的用户名密码明文传输到我的服务器去处理，但是并不会保存！因为小程序的wx.request API不提供http 302状态的返回处理，登录时如果直接用小程序去post V2EX是无法获取到正确的cookie的，所以要经过我的服务器中转获得。服务器的处理代码请看：[/src/web/v2exlogin.php](https://github.com/thelittlepandaisbehind/ProjectV2EX/blob/master/src/web/v2exlogin.php)。除了登录所需要的中转请求接口外，其他的功能都是直接使用V2EX的，请放心使用。
